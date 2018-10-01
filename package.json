@@ -1,0 +1,62 @@
+{
+   "name": "mmmapi",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "license": "MIT",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "nodemon": "^1.18.4",
+      "ts-node": "3.3.0",
+      "typescript": "2.5.2"
+   },
+   "dependencies": {
+      "@types/bcryptjs": "^2.4.2",
+      "@types/koa": "^2.0.46",
+      "@types/koa-bodyparser": "^5.0.1",
+      "@types/koa-router": "^7.0.32",
+      "bcryptjs": "^2.4.3",
+      "class-validator": "^0.9.1",
+      "koa": "^2.5.3",
+      "koa-bodyparser": "^4.2.1",
+      "koa-router": "^7.4.0",
+      "mysql": "^2.14.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.7"
+   },
+   "scripts": {
+      "start": "nodemon --watch 'src/**/*' -e .ts,tsx --exec ts-node src/server.ts"
+   },
+   "resolutions": {
+      "@types/node": "10.11.3",
+      "debug": "3.2.5",
+      "http-errors": "1.7.1",
+      "koa-compose": "4.1.0",
+      "ms": "2.1.1",
+      "iconv-lite": "0.4.24",
+      "isarray": "1.0.0",
+      "chalk": "2.4.1",
+      "yargs": "11.1.0",
+      "ansi-styles": "3.2.1",
+      "supports-color": "5.5.0",
+      "string-width": "2.1.1",
+      "yargs-parser": "9.0.2",
+      "strip-ansi": "4.0.0",
+      "ansi-regex": "3.0.0",
+      "is-fullwidth-code-point": "2.0.0",
+      "yallist": "3.0.2",
+      "minimist": "0.0.8",
+      "is-glob": "4.0.0",
+      "define-property": "2.0.2",
+      "extend-shallow": "3.0.2",
+      "kind-of": "6.0.2",
+      "is-descriptor": "1.0.2",
+      "isobject": "2.1.0",
+      "is-accessor-descriptor": "1.0.0",
+      "is-data-descriptor": "0.1.4",
+      "is-extendable": "0.1.1",
+      "has-value": "0.3.1",
+      "set-value": "0.4.3",
+      "has-values": "1.0.0",
+      "nopt": "4.0.1"
+   }
+}
