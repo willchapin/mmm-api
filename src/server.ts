@@ -8,7 +8,6 @@ import { createConnection } from "typeorm";
 
 import { routes } from './routes';
 
-
 async function start() {
   await createConnection();
 

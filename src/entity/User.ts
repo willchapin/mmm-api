@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Unique} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Unique } from 'typeorm';
 import { Purchace } from './Purchase';
 
 @Entity()
@@ -11,7 +11,7 @@ export class User {
     @Column()
     email: string;
 
-    @Column()
+    @Column({ select: false })
     password: string;
 
     @OneToMany(type => Purchace, purchace => purchace.user)
