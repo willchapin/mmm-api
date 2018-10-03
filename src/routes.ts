@@ -1,25 +1,34 @@
-import { getAllUsers, getUserById, createUser, updateUser } from './controller/UserAction';
-import { getAllTags, createTag } from './controller/TagAction';
+import { getAllUsers, getUserById, createUser, updateUser } from './user/actions';
+import { validateGetUserById, validateCreateUser, validateUpdateUser } from './user/validators';
+
+import { getAllTags, createTag } from './tag/actions';
+import { validateCreateTag } from './tag/validators';
+
+import { getAllPurchases, createPurchase, updatePurchase } from './purchase/actions';
+//import { validateGetPurchaseById, validateCreatePurchase, validateUpdatePurchase } from './user/validators';
 
 export const routes = [
     {
         path: '/users',
         method: 'get',
-        action: getAllUsers 
+        action: getAllUsers
     },
     {
         path: '/user/:id',
         method: 'get',
-        action: getUserById 
+        validation: validateGetUserById,
+        action: getUserById,
     },
     {
         path: '/user',
         method: 'post',
+        validation: validateCreateUser,
         action: createUser 
     },
     {
         path: '/user',
         method: 'put',
+        validation: validateUpdateUser,
         action: updateUser 
     },
     {
@@ -30,16 +39,22 @@ export const routes = [
     {
         path: '/tag',
         method: 'post',
-        action: createTag 
+        action: createTag,
+        validation: validateCreateTag,
     },
-    //{
-    //    path: '/purchace',
-    //    method: 'get',
-    //    action: getAllPurchaces
-    //},
-    //{
-    //    path: '/tag',
-    //    method: 'post',
-    //    action: createTag 
-    //}
+    {
+        path: '/purchase',
+        method: 'get',
+        action: getAllPurchases
+    },
+    {
+        path: '/purchase',
+        method: 'post',
+        action: createPurchase
+    },
+    {
+        path: '/purchase',
+        method: 'put',
+        action: updatePurchase 
+    }
 ];

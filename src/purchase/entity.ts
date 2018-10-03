@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
-import { User } from './User';
-import { Tag } from './Tag';
+import { User } from '../user/entity';
+import { Tag } from '../tag/entity';
 
 @Entity()
-export class Purchace {
+export class Purchase {
 
     @PrimaryGeneratedColumn()
     id: number;

@@ -16,7 +16,13 @@ async function start() {
 
   app.use(bodyParser());
   app.use(router.routes());
-  routes.forEach(route => router[route.method](route.path, route.action));
+  routes.forEach((route: any) => {
+    if (route.validation) {
+      router[route.method](route.path, route.validation, route.action);
+    } else {
+      router[route.method](route.path, route.action);
+    }
+  });
 
   app.listen(3000);
 }
