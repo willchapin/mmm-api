@@ -16,7 +16,6 @@
       "@types/koa-bodyparser": "^5.0.1",
       "@types/koa-router": "^7.0.32",
       "bcryptjs": "^2.4.3",
-      "class-validator": "^0.9.1",
       "joi": "^13.7.0",
       "koa": "^2.5.3",
       "koa-bodyparser": "^4.2.1",

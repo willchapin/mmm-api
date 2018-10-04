@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Unique } from 'typeorm';
-import { Length, IsEmail } from 'class-validator';
 import { Purchase } from '../purchase/entity';
 
 @Entity()
@@ -10,7 +9,6 @@ export class User {
     id: number;
 
     @Column() // index here
-    @IsEmail()
     email: string;
 
     @Column()

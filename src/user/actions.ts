@@ -10,7 +10,6 @@ export async function getAllUsers(ctx, next) {
 }
 
 export async function getUserById(ctx) {
-  debugger;
   const id = ctx.params.id;
   if (ctx.user.id != id) {
     ctx.status = 403;
