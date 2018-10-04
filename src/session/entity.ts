@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { User } from '../user/entity';
 
 @Entity()
@@ -6,6 +6,9 @@ export class Session {
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @CreateDateColumn({type: "timestamp"})
+    createdAt: Date;
 
     @Column()
     token: string;

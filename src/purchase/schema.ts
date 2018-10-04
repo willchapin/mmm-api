@@ -10,7 +10,6 @@ export const getPurchaseSchema = {
 };
 
 export const createPurchaseSchema = {
-    userId: userId.required(),
     tagIds: tagIds.required(),
     description,
 };

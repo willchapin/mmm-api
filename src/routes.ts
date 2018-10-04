@@ -49,10 +49,10 @@ export const routes = [
         action: getAllTags 
     },
     {
-        path: '/tag',
+        path: '/tags',
         method: 'post',
-        action: createTag,
         validation: validateCreateTag,
+        action: createTag,
     },
     {
         path: '/users/:userId/purchases',
@@ -64,8 +64,8 @@ export const routes = [
         path: '/users/:userId/purchases',
         method: 'post',
         authorization: byUser,
-        action: createPurchase,
         validation: validateCreatePurchase,
+        action: createPurchase,
     },
     {
         path: '/users/:userId/purchase',

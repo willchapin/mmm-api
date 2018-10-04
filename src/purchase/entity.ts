@@ -8,6 +8,9 @@ export class Purchase {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    timestamp: Date;
+
     @Column()
     description: string;
 

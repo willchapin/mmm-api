@@ -8,7 +8,20 @@ export async function getAllTags(ctx) {
 };
 
 export async function createTag(ctx) {
+  const name = ctx.request.body.name.toLowerCase();
+
+  const existingTag = await getRepository(Tag).findOne({where: {name }});
+  if (existingTag) {
+    ctx.status = 409;
+    ctx.body = {
+      error: {
+        message: `A Tag with name "${name}" already exists.`,
+      }
+    }
+    return;
+  }
+
   const tag = new Tag();
-  tag.name = ctx.request.body.name;
+  tag.name = name;
   ctx.body = await getRepository(Tag).save(tag);
 };
