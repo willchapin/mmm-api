@@ -22,11 +22,12 @@ async function start() {
   app.use(router.allowedMethods());
 
   routes.forEach((route: any) => {
+    let partialRoute = router[route.method].bind(router, route.path);
     if (route.validation) {
-      router[route.method](route.path, route.validation, route.action);
-    } else {
-      router[route.method](route.path, route.action);
-    }
+      partialRoute = partialRoute.bind(router, route.validation);
+    } 
+
+    partialRoute(route.action);
   });
 
   app.listen(3000);

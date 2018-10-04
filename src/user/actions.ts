@@ -10,7 +10,7 @@ export async function getAllUsers(ctx, next) {
 }
 
 export async function getUserById(ctx) {
-  const id = ctx.params.id;
+  const id = ctx.params.userId;
   if (ctx.user.id != id) {
     ctx.status = 403;
     ctx.body = {

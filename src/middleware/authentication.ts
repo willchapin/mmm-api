@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 
 import { createHash } from 'crypto';
-import { User } from '../User/entity';
 import { Session } from '../session/entity';
 
 export function authentication() {

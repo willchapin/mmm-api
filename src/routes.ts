@@ -17,7 +17,7 @@ export const routes = [
         action: getAllUsers
     },
     {
-        path: '/users/:id',
+        path: '/users/:userId',
         method: 'get',
         validation: validateGetUserById,
         action: getUserById,
@@ -29,7 +29,7 @@ export const routes = [
         action: createUser 
     },
     {
-        path: '/users/:id',
+        path: '/users/:userId',
         method: 'put',
         validation: validateUpdateUser,
         action: updateUser 
@@ -46,18 +46,18 @@ export const routes = [
         validation: validateCreateTag,
     },
     {
-        path: '/users/:id/purchases',
+        path: '/users/:userId/purchases',
         method: 'get',
         action: getAllPurchases
     },
     {
-        path: '/users/:id/purchases',
+        path: '/users/:userId/purchases',
         method: 'post',
         action: createPurchase,
         validation: validateCreatePurchase,
     },
     {
-        path: '/users/:id/purchase',
+        path: '/users/:userId/purchase',
         method: 'put',
         action: updatePurchase 
     },
