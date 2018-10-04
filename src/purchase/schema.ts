@@ -6,17 +6,17 @@ const userId = Joi.number().integer();
 const tagIds = Joi.array().items(Joi.number().integer());
 
 export const getPurchaseSchema = {
-    id: id.required()
+  id: id.required()
 };
 
 export const createPurchaseSchema = {
-    tagIds: tagIds.required(),
-    description,
+  tagIds: tagIds.required(),
+  description,
 };
 
 export const updatePurchaseSchema = {
-    id: id.required(),
-    description,
-    userId,
-    tagIds,
+  id: id.required(),
+  description,
+  userId,
+  tagIds,
 };
