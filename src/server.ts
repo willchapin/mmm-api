@@ -7,6 +7,7 @@ import * as bodyParser from 'koa-bodyparser';
 import { createConnection } from "typeorm";
 
 import { routes } from './routes';
+import { authentication } from './middleware/authentication';
 
 async function start() {
   await createConnection();
@@ -15,7 +16,11 @@ async function start() {
   const router = new Router();
 
   app.use(bodyParser());
+  app.use(authentication());
+
   app.use(router.routes());
+  app.use(router.allowedMethods());
+
   routes.forEach((route: any) => {
     if (route.validation) {
       router[route.method](route.path, route.validation, route.action);

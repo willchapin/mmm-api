@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Unique } from 'typeorm';
+import { Length, IsEmail } from 'class-validator';
 import { Purchase } from '../purchase/entity';
 
 @Entity()
@@ -8,10 +9,11 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column() // index here
+    @IsEmail()
     email: string;
 
-    @Column({ select: false })
+    @Column()
     password: string;
 
     @OneToMany(type => Purchase, purchase => purchase.user)

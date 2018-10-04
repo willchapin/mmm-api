@@ -26,7 +26,7 @@
       "typeorm": "0.2.7"
    },
    "scripts": {
-      "start": "nodemon --watch 'src/**/*' -e .ts,tsx --exec ts-node src/server.ts"
+      "start": "nodemon --watch 'src/**/*' -e .ts,tsx --exec ts-node --inspect src/server.ts"
    },
    "resolutions": {
       "@types/node": "10.11.3",

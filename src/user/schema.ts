@@ -1,9 +1,7 @@
 import * as Joi from 'joi';
+import { email, password } from '../shared/schema';
 
 const id = Joi.number();
-const email = Joi.string().email({ minDomainAtoms: 2 });
-// Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
-const password = Joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/);
 
 export const getUserSchema = {
     id: id.required()

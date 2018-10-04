@@ -5,7 +5,10 @@ import { getAllTags, createTag } from './tag/actions';
 import { validateCreateTag } from './tag/validators';
 
 import { getAllPurchases, createPurchase, updatePurchase } from './purchase/actions';
-//import { validateGetPurchaseById, validateCreatePurchase, validateUpdatePurchase } from './user/validators';
+import { validateCreatePurchase } from './purchase/validators';
+
+import { login } from './session/actions';
+import { validateLogin } from './session/validators';
 
 export const routes = [
     {
@@ -14,19 +17,19 @@ export const routes = [
         action: getAllUsers
     },
     {
-        path: '/user/:id',
+        path: '/users/:id',
         method: 'get',
         validation: validateGetUserById,
         action: getUserById,
     },
     {
-        path: '/user',
+        path: '/users',
         method: 'post',
         validation: validateCreateUser,
         action: createUser 
     },
     {
-        path: '/user',
+        path: '/users/:id',
         method: 'put',
         validation: validateUpdateUser,
         action: updateUser 
@@ -43,18 +46,25 @@ export const routes = [
         validation: validateCreateTag,
     },
     {
-        path: '/purchase',
+        path: '/users/:id/purchases',
         method: 'get',
         action: getAllPurchases
     },
     {
-        path: '/purchase',
+        path: '/users/:id/purchases',
         method: 'post',
-        action: createPurchase
+        action: createPurchase,
+        validation: validateCreatePurchase,
     },
     {
-        path: '/purchase',
+        path: '/users/:id/purchase',
         method: 'put',
         action: updatePurchase 
+    },
+    {
+        path: '/login',
+        method: 'post',
+        action: login,
+        validation: validateLogin,
     }
 ];

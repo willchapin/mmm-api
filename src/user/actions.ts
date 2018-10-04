@@ -1,10 +1,8 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import * as Joi from 'joi';
 
 import { User } from './entity';
-
-const hashingWork = 5;
+import { bcryptCost } from '../shared/constants';
 
 export async function getAllUsers(ctx, next) {
   ctx.body = await getRepository(User).find();
@@ -12,7 +10,18 @@ export async function getAllUsers(ctx, next) {
 }
 
 export async function getUserById(ctx) {
+  debugger;
   const id = ctx.params.id;
+  if (ctx.user.id != id) {
+    ctx.status = 403;
+    ctx.body = {
+      error: {
+        message: 'Forbidden',
+      }
+    }
+    return;
+  }
+
   const user = await getRepository(User).findOne(id);
   if (!user) {
     ctx.status = 404;
@@ -42,25 +51,20 @@ export async function createUser(ctx, next) {
 
   const user = new User();
   user.email = email;
-  user.password = await hash(ctx.request.body.password, hashingWork);
+  user.password = await hash(ctx.request.body.password, bcryptCost);
 
   const savedUser = await getRepository(User).save(user);
-  // { select: false } in the entity doesn't work here because it's a save, not select
-  delete savedUser.password;
-
   ctx.body = savedUser;
+
   await next();
 }
 
 export async function updateUser(ctx) {
   const body = ctx.request.body;
   if (body.password) {
-    body.password = await hash(body.password, hashingWork);
+    body.password = await hash(body.password, bcryptCost);
   }
 
   const updatedUser = await getRepository(User).save(body);
-  // { select: false } in the entity doesn't work here because it's a save, not select
-  delete updatedUser.password;
-
   ctx.body = await getRepository(User).save(updatedUser);
 }
