@@ -11,16 +11,6 @@ export async function getAllUsers(ctx, next) {
 
 export async function getUserById(ctx) {
   const id = ctx.params.userId;
-  if (ctx.user.id != id) {
-    ctx.status = 403;
-    ctx.body = {
-      error: {
-        message: 'Forbidden',
-      }
-    }
-    return;
-  }
-
   const user = await getRepository(User).findOne(id);
   if (!user) {
     ctx.status = 404;

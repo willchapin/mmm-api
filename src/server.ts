@@ -27,6 +27,10 @@ async function start() {
       partialRoute = partialRoute.bind(router, route.validation);
     } 
 
+    if (route.authorization) {
+      partialRoute = partialRoute.bind(router, route.authorization);
+    } 
+
     partialRoute(route.action);
   });
 
