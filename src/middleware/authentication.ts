@@ -11,7 +11,17 @@ export function authentication() {
     }
 
     const authHeader = ctx.request.header.authorization;
-    const token = authHeader.split(' ')[1];
+    if (!authHeader) {
+      unauthorized(ctx);
+      return;
+    }
+
+    const [type, token] = authHeader.split(' ');
+    if (type !== 'Bearer' || !token) {
+      unauthorized(ctx);
+      return;
+    }
+
     const hashedToken = createHash('sha256').update(token).digest('hex');
 
     const session = await getRepository(Session).findOne({
@@ -20,12 +30,7 @@ export function authentication() {
     });
 
     if (!session) {
-      ctx.status = 401;
-      ctx.body = {
-        error: {
-          message: 'Unauthorized.'
-        }
-      };
+      unauthorized(ctx);
       return;
     }
 
@@ -33,4 +38,14 @@ export function authentication() {
 
     await next();
   }
+
+  function unauthorized(ctx) {
+    ctx.status = 401;
+    ctx.body = {
+      error: {
+        message: 'Unauthorized.'
+      }
+    };
+  }
+
 }
