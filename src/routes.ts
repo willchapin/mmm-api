@@ -51,6 +51,7 @@ export const routes = [
     {
         path: '/tags',
         method: 'post',
+        authorization: byUser,
         validation: validateCreateTag,
         action: createTag,
     },
