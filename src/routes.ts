@@ -25,16 +25,16 @@ export const routes = [
         action: getAllUsers
     },
     {
-        path: '/users/:userId',
-        method: 'get',
-        authorization: byUser,
-        action: getUserById,
-    },
-    {
         path: '/users',
         method: 'post',
         validation: validateCreateUser,
         action: createUser 
+    },
+    {
+        path: '/users/:userId',
+        method: 'get',
+        authorization: byUser,
+        action: getUserById,
     },
     {
         path: '/users/:userId',
