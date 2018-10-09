@@ -1,4 +1,4 @@
-import { getAllUsers, getUserById, createUser, updateUser } from './user/actions';
+import { getAllUsers, getUserById, createUser, updateUser, getUserAuth } from './user/actions';
 import { validateCreateUser, validateUpdateUser } from './user/validators';
 
 import { getAllTags, createTag } from './tag/actions';
@@ -23,6 +23,12 @@ export const routes = [
         path: '/users',
         method: 'get',
         action: getAllUsers
+    },
+    {
+        path: '/users/:userId/auth',
+        method: 'get',
+        action: getUserAuth,
+        authorization: byUser,
     },
     {
         path: '/users',

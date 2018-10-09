@@ -9,6 +9,10 @@ export async function getAllUsers(ctx, next) {
   await next();
 }
 
+export async function getUserAuth(ctx, next) {
+  ctx.body = { auth: true };
+}
+
 export async function getUserById(ctx) {
   const id = ctx.params.userId;
   const user = await getRepository(User).findOne(id);
