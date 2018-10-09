@@ -8,11 +8,17 @@ export class Purchase {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    @Column({
+        type: 'timestamp',
+        default: 'CURRENT_TIMESTAMP',
+    })
     timestamp: Date;
 
     @Column()
     description: string;
+
+    @Column()
+    cost: number; // cents
 
     @ManyToOne(type => User, user => user.purchaces)
     user: User;

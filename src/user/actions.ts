@@ -34,12 +34,13 @@ export async function createUser(ctx, next) {
       error: {
         message: `A User with email "${email}" already exists.`,
       }
-    }
+    };
     return;
   }
 
   const user = new User();
   user.email = email;
+  user.name = ctx.request.body.name;
   user.password = await hash(ctx.request.body.password, bcryptCost);
 
   const savedUser = await getRepository(User).save(user);
@@ -54,6 +55,6 @@ export async function updateUser(ctx) {
     body.password = await hash(body.password, bcryptCost);
   }
 
-  const updatedUser = await getRepository(User).save(body);
+  const updatedUser = {...ctx.user, ...ctx.request.body};
   ctx.body = await getRepository(User).save(updatedUser);
 }

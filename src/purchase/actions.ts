@@ -13,6 +13,7 @@ export async function createPurchase(ctx) {
   const tags = await getRepository(Tag).findByIds(ctx.request.body.tagIds);
 
   const purchase = new Purchase();
+  purchase.cost = ctx.request.body.cost;
   purchase.description = ctx.request.body.description;
   purchase.tags = tags;
   purchase.user = ctx.user;
