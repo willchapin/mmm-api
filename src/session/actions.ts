@@ -1,15 +1,11 @@
 import { getConnection } from "typeorm";
 import { getRepository } from 'typeorm';
 
-import { compare, hash } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import { randomBytes, createHash } from 'crypto';
 
 import { User } from '../user/entity';
 import { Session } from './entity';
-
-import { bcryptCost } from '../shared/constants';
-import { forbidden } from 'joi';
-import { password } from '../shared/schema';
 
 export async function login(ctx) {
   const email = ctx.request.body.email;
@@ -40,7 +36,10 @@ export async function login(ctx) {
     token: createHash('sha256').update(token).digest('hex')
   });
 
-  ctx.body = { token };
+  ctx.body = { 
+    token,
+    userId: user.id
+  };
 }
 
 function unauthorized(ctx) {
