@@ -5,7 +5,17 @@ import { Session } from '../session/entity';
 
 export function authentication() {
   return async function(ctx, next) {
-    if (ctx.request.path === '/login') {
+    const bypassAuth = (
+      // when logging in
+      ctx.request.path === '/login' ||
+      // when creating new users (signing up)
+      (
+        ctx.request.path === '/users' &&
+        ctx.request.method === 'POST'
+      )
+    );
+
+    if (bypassAuth) {
       await next();
       return;
     }
