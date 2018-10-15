@@ -4,7 +4,11 @@ import { Purchase } from './entity';
 import { Tag } from '../tag/entity';
 
 export async function getAllPurchases(ctx) {
-  ctx.body = await getRepository(Purchase).find({ where: { user: ctx.user }});
+  ctx.body = await getRepository(Purchase).find({
+    relations: ['tags'],
+    where: { user: ctx.user },
+    order: { timestamp: 'DESC'}
+  });
 };
 
 export async function createPurchase(ctx) {
