@@ -29,9 +29,3 @@ export async function createPurchase(ctx) {
 
   ctx.body = await getRepository(Purchase).save(purchase);
 };
-
-export async function updatePurchase(ctx) {
-  const purchase = new Purchase();
-  //tag.name = ctx.request.body.name;
-  ctx.body = await getRepository(Purchase).save(purchase);
-};

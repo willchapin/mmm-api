@@ -10,7 +10,7 @@ export async function getAllTags(ctx) {
 export async function createTag(ctx) {
   const name = ctx.request.body.name.toLowerCase();
 
-  const existingTag = await getRepository(Tag).findOne({where: {name }});
+  const existingTag = await getRepository(Tag).findOne({ where: { name } });
   if (existingTag) {
     ctx.status = 409;
     ctx.body = {

@@ -73,11 +73,5 @@ export const routes = [
         authorization: byUser,
         validation: validateCreatePurchase,
         action: createPurchase,
-    },
-    {
-        path: '/users/:userId/purchase',
-        method: 'put',
-        authorization: byUser,
-        action: updatePurchase 
-    },
+    }
 ];
