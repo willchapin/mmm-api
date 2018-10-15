@@ -1,10 +1,11 @@
 import * as Joi from 'joi';
+import { tagName } from '../tag/schema';
 
 const id = Joi.number();
 const description = Joi.string().min(1).max(280);
 const userId = Joi.number().integer();
 const cost = Joi.number().integer();
-const tagIds = Joi.array().items(Joi.number().integer());
+const tagNames = Joi.array().items(tagName);
 
 export const getPurchaseSchema = {
   id: id.required()
@@ -12,12 +13,6 @@ export const getPurchaseSchema = {
 
 export const createPurchaseSchema = {
   cost: cost.required(),
-  tagIds: tagIds.required(),
-  description,
-};
-
-export const updatePurchaseSchema = {
-  cost,
-  tagIds,
+  tagNames: tagNames.required(),
   description,
 };

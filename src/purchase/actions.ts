@@ -8,8 +8,18 @@ export async function getAllPurchases(ctx) {
 };
 
 export async function createPurchase(ctx) {
+  const tagNames = ctx.request.body.tagNames;
+  const tags: any = await Promise.all(tagNames.map(async (tagName): Promise<Tag> => {
+    // get or create tags
+    let tag = await getRepository(Tag).findOne({ where: { name: tagName } });
+    if (!tag) {
+      tag = new Tag();
+      tag.name = tagName;
+      tag = await getRepository(Tag).save(tag);
+    }
 
-  const tags = await getRepository(Tag).findByIds(ctx.request.body.tagIds);
+    return tag;
+  }));
 
   const purchase = new Purchase();
   purchase.cost = ctx.request.body.cost;
