@@ -4,7 +4,7 @@ import { validateCreateUser, validateUpdateUser } from './user/validators';
 import { getAllTags, createTag } from './tag/actions';
 import { validateCreateTag } from './tag/validators';
 
-import { getAllPurchases, createPurchase, updatePurchase } from './purchase/actions';
+import { getAllPurchases, createPurchase } from './purchase/actions';
 import { validateCreatePurchase } from './purchase/validators';
 
 import { login } from './session/actions';
