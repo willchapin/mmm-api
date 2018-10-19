@@ -10,7 +10,7 @@ export class Purchase {
 
     @Column({
         type: 'timestamp',
-        default: 'CURRENT_TIMESTAMP',
+        default: () => 'CURRENT_TIMESTAMP',
     })
     timestamp: Date;
 
