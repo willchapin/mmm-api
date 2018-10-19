@@ -7,15 +7,17 @@ import * as bodyParser from 'koa-bodyparser';
 import { createConnection } from "typeorm";
 
 import { routes } from './routes';
+import { logging } from './middleware/logging';
 import { authentication } from './middleware/authentication';
 
-async function start() {
+export const getApp = async() => {
   await createConnection();
 
   const app = new Koa();
   const router = new Router();
 
   app.use(bodyParser());
+  app.use(logging());
   app.use(authentication());
 
   app.use(router.routes());
@@ -35,7 +37,5 @@ async function start() {
     partialRoute(route.action);
   });
 
-  app.listen(3000);
-}
-
-start();
+  return app;
+};
