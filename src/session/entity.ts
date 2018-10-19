@@ -16,5 +16,4 @@ export class Session {
     @OneToOne(type => User)
     @JoinColumn()
     user: User;
-
 }

@@ -26,5 +26,4 @@ export class Purchase {
     @ManyToMany(type => Tag)
     @JoinTable()
     tags: Tag[];
-
 }
