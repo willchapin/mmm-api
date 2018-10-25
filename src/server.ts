@@ -4,15 +4,11 @@ import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as bodyParser from 'koa-bodyparser';
 
-import { createConnection } from "typeorm";
-
 import { routes } from './routes';
 import { logging } from './middleware/logging';
 import { authentication } from './middleware/authentication';
 
-export const getApp = async() => {
-  await createConnection();
-
+export const getApp = () => {
   const app = new Koa();
   const router = new Router();
 

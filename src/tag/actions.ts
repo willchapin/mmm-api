@@ -1,5 +1,4 @@
-import { getRepository, getManager } from 'typeorm';
-
+import { getRepository } from 'typeorm';
 
 import { Tag } from './entity';
 

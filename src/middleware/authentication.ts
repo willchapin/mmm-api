@@ -12,6 +12,11 @@ export function authentication() {
       (
         ctx.request.path === '/users' &&
         ctx.request.method === 'POST'
+      ) ||
+      // when getting all tags
+      (
+        ctx.request.path === '/tags' &&
+        ctx.request.method === 'GET'
       )
     );
 
