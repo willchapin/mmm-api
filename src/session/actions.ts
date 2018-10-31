@@ -7,7 +7,7 @@ import { randomBytes, createHash } from 'crypto';
 import { User } from '../user/entity';
 import { Session } from './entity';
 
-export async function login(ctx) {
+export async function login(ctx: any) {
   const email = ctx.request.body.email;
   const user = await getRepository(User).findOne({ where: { email } });
   if (!user) {
@@ -42,7 +42,7 @@ export async function login(ctx) {
   };
 }
 
-function unauthorized(ctx) {
+function unauthorized(ctx: any) {
   ctx.status = 401;
   ctx.body = {
     error: {

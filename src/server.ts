@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as bodyParser from 'koa-bodyparser';
 
-import { routes } from './routes';
+import { routes, Route } from './routes';
 import { logging } from './middleware/logging';
 import { authentication } from './middleware/authentication';
 
@@ -13,13 +12,14 @@ export const getApp = () => {
   const router = new Router();
 
   app.use(bodyParser());
+
   app.use(logging());
   app.use(authentication());
 
   app.use(router.routes());
   app.use(router.allowedMethods());
 
-  routes.forEach((route: any) => {
+  routes.forEach((route: Route) => {
     let partialRoute = router[route.method].bind(router, route.path);
 
     if (route.authorization) {

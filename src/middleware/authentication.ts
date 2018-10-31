@@ -2,9 +2,10 @@ import { getRepository } from 'typeorm';
 
 import { createHash } from 'crypto';
 import { Session } from '../session/entity';
+import { Context } from 'koa';
 
 export function authentication() {
-  return async function(ctx, next) {
+  return async (ctx: Context, next: Function) => {
     const bypassAuth = (
       // when logging in
       ctx.request.path === '/login' ||
@@ -52,9 +53,9 @@ export function authentication() {
     ctx.user = session.user;
 
     await next();
-  }
+  };
 
-  function unauthorized(ctx) {
+  function unauthorized(ctx: any) {
     ctx.status = 401;
     ctx.body = {
       error: {

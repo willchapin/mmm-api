@@ -12,7 +12,17 @@ import { validateLogin } from './session/validators';
 
 import { byUser } from './middleware/authorization';
 
-export const routes = [
+type Method = 'post' | 'get' | 'put' | 'delete' | 'options';
+
+export interface Route {
+    path: string;
+    method: Method;
+    action: Function;
+    validation?: Function;
+    authorization?: Function;
+}
+
+export const routes: Route[] = [
     {
         path: '/login',
         method: 'post',

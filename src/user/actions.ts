@@ -4,16 +4,15 @@ import { hash } from 'bcryptjs';
 import { User } from './entity';
 import { bcryptCost } from '../shared/constants';
 
-export async function getAllUsers(ctx, next) {
+export async function getAllUsers(ctx: any) {
   ctx.body = await getRepository(User).find();
-  await next();
 }
 
-export async function getUserAuth(ctx, next) {
+export async function getUserAuth(ctx: any) {
   ctx.body = { auth: true };
 }
 
-export async function getUserById(ctx) {
+export async function getUserById(ctx: any) {
   const id = ctx.params.userId;
   const user = await getRepository(User).findOne(id);
   if (!user) {
@@ -22,15 +21,16 @@ export async function getUserById(ctx) {
       error: {
         message: `User with id ${id} does not exist.`,
       }
-    }
+    };
     return;
   }
 
   ctx.body = user;
 }
 
-export async function createUser(ctx, next) {
+export async function createUser(ctx: any) {
   const email = ctx.request.body.email;
+
   const existingUser = await getRepository(User).findOne({ where: { email } });
   if (existingUser) {
     ctx.status = 409;
@@ -49,11 +49,9 @@ export async function createUser(ctx, next) {
 
   const savedUser = await getRepository(User).save(user);
   ctx.body = savedUser;
-
-  await next();
 }
 
-export async function updateUser(ctx) {
+export async function updateUser(ctx: any) {
   const body = ctx.request.body;
   if (body.password) {
     body.password = await hash(body.password, bcryptCost);

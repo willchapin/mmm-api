@@ -1,5 +1,5 @@
 export function logging() {
-  return async function(ctx, next) {
+  return async (ctx: any, next: Function) => {
     const start = Date.now();
     await next();
     const time = Date.now() - start;
@@ -7,5 +7,5 @@ export function logging() {
       `${ctx.request.method} ${ctx.request.path}`;
 
     console.log(requestOut);
-  }
+  };
 }

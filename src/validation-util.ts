@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 
-export async function validateParams(params, schema, ctx, next) {
-  const result = Joi.validate(params, schema, { abortEarly: false });
+export async function validateParams(ctx: any, schema: Joi.ObjectSchema, next: Function) {
+  const result = Joi.validate(ctx.request.body, schema, { abortEarly: false });
   if (!result.error) {
     await next();
   } else {
@@ -11,6 +11,6 @@ export async function validateParams(params, schema, ctx, next) {
         message: 'Invalid parameters',
         details: result.error.details
       }
-    }
+    };
   }
 }
