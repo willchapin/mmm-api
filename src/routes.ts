@@ -43,7 +43,7 @@ export const routes: Route[] = [
     {
         path: '/users',
         method: 'post',
-        validation: validateCreateUser,
+        //validation: validateCreateUser,
         action: createUser 
     },
     {
@@ -56,7 +56,7 @@ export const routes: Route[] = [
         path: '/users/:userId',
         method: 'put',
         authorization: byUser,
-        validation: validateUpdateUser,
+        //validation: validateUpdateUser,
         action: updateUser 
     },
     {

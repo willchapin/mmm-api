@@ -55,7 +55,7 @@ export function authentication() {
     await next();
   };
 
-  function unauthorized(ctx: any) {
+  function unauthorized(ctx: Context) {
     ctx.status = 401;
     ctx.body = {
       error: {

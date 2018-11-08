@@ -3,6 +3,11 @@ import { hash } from 'bcryptjs';
 
 import { User } from './entity';
 import { bcryptCost } from '../shared/constants';
+import { Context, Request } from 'koa';
+
+import { validateCreateUser, validateUpdateUser } from './validators';
+import { UpdateUserBody, updateUserSchema } from './schema';
+import { _validateParams } from '../validation-util';
 
 export async function getAllUsers(ctx: any) {
   ctx.body = await getRepository(User).find();
@@ -28,8 +33,13 @@ export async function getUserById(ctx: any) {
   ctx.body = user;
 }
 
-export async function createUser(ctx: any) {
-  const email = ctx.request.body.email;
+export async function createUser(ctx: Context) {
+  const body = ctx.request.body;
+  if (!validateCreateUser(body, ctx)) {
+    return;
+  }
+
+  const email = body.email;
 
   const existingUser = await getRepository(User).findOne({ where: { email } });
   if (existingUser) {
@@ -44,19 +54,21 @@ export async function createUser(ctx: any) {
 
   const user = new User();
   user.email = email;
-  user.name = ctx.request.body.name;
-  user.password = await hash(ctx.request.body.password, bcryptCost);
+  user.name = body.name;
+  user.password = await hash(body.password, bcryptCost);
 
   const savedUser = await getRepository(User).save(user);
   ctx.body = savedUser;
 }
 
-export async function updateUser(ctx: any) {
+export async function updateUser(ctx: Context) {
   const body = ctx.request.body;
-  if (body.password) {
-    body.password = await hash(body.password, bcryptCost);
-  }
+  if (validateUpdateUser(body, ctx)) {
+    if (body.password) {
+      body.password = await hash(body.password, bcryptCost);
+    }
 
-  const updatedUser = {...ctx.user, ...ctx.request.body};
-  ctx.body = await getRepository(User).save(updatedUser);
+    const updatedUser = {...ctx.user, ...body};
+    ctx.body = await getRepository(User).save(updatedUser);
+  } 
 }

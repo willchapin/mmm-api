@@ -1,7 +1,20 @@
 import * as Joi from 'joi';
 import { email, password } from '../shared/schema';
 
-const id = Joi.number();
+export type CreateUserBody = {
+    email: string;
+    password: string;
+    name: string;
+};
+
+export type UpdateUserBody = Partial<CreateUserBody>;
+
+// export type UpdateUserBody = {
+//     email?: string;
+//     password?: string;
+//     name?: string;
+// };
+
 const name = Joi.string().min(3).max(20);
 
 export const createUserSchema = Joi.object().keys({

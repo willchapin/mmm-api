@@ -1,9 +1,10 @@
-import { getConnection, getRepository, getManager } from 'typeorm';
+import { getRepository } from 'typeorm';
 
 import { Purchase } from './entity';
 import { Tag } from '../tag/entity';
+import { Context } from 'koa';
 
-export async function getAllPurchases(ctx: any) {
+export async function getAllPurchases(ctx: Context) {
   ctx.body = await getRepository(Purchase).find({
     relations: ['tags'],
     where: { user: ctx.user },

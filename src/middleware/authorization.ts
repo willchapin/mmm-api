@@ -1,6 +1,6 @@
-import { getRepository } from 'typeorm';
+import { Context } from 'koa';
 
-export async function byUser(ctx: any, next: Function) {
+export async function byUser(ctx: Context, next: Function) {
   console.log('params', JSON.stringify(ctx.params));
   console.log(ctx.user.id, ctx.params.userId);
   if (ctx.user.id !== Number(ctx.params.userId)) {

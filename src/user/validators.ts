@@ -1,12 +1,11 @@
-import { createUserSchema, updateUserSchema } from './schema';
-import { validateParams } from '../validation-util';
+import { createUserSchema, updateUserSchema, CreateUserBody, UpdateUserBody } from './schema';
+import { _validateParams } from '../validation-util';
+import { Context, Request } from 'koa';
 
-import { IRouterContext } from 'koa-router';
-
-export async function validateCreateUser(ctx: IRouterContext, next: Function) {
-  await validateParams(ctx, createUserSchema, next);
+export function validateCreateUser(body: Request['body'], ctx: Context): body is CreateUserBody {
+  return _validateParams(body, ctx, createUserSchema);
 }
 
-export async function validateUpdateUser(ctx: IRouterContext, next: Function) {
-  await validateParams(ctx, updateUserSchema, next);
+export function validateUpdateUser(body: Request['body'], ctx: Context): body is UpdateUserBody {
+  return _validateParams(body, ctx, updateUserSchema);
 }
