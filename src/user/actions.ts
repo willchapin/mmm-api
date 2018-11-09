@@ -3,21 +3,19 @@ import { hash } from 'bcryptjs';
 
 import { User } from './entity';
 import { bcryptCost } from '../shared/constants';
-import { Context, Request } from 'koa';
+import { Context } from 'koa';
 
 import { validateCreateUser, validateUpdateUser } from './validators';
-import { UpdateUserBody, updateUserSchema } from './schema';
-import { _validateParams } from '../validation-util';
 
-export async function getAllUsers(ctx: any) {
+export async function getAllUsers(ctx: Context) {
   ctx.body = await getRepository(User).find();
 }
 
-export async function getUserAuth(ctx: any) {
+export async function getUserAuth(ctx: Context) {
   ctx.body = { auth: true };
 }
 
-export async function getUserById(ctx: any) {
+export async function getUserById(ctx: Context) {
   const id = ctx.params.userId;
   const user = await getRepository(User).findOne(id);
   if (!user) {

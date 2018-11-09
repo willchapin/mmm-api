@@ -7,13 +7,11 @@ export type CreateUserBody = {
     name: string;
 };
 
-export type UpdateUserBody = Partial<CreateUserBody>;
-
-// export type UpdateUserBody = {
-//     email?: string;
-//     password?: string;
-//     name?: string;
-// };
+export type UpdateUserBody = {
+    email?: string;
+    password?: string;
+    name?: string;
+};
 
 const name = Joi.string().min(3).max(20);
 

@@ -1,7 +1,7 @@
-import { createPurchaseSchema } from './schema';
+import { Context, Request } from 'koa';
+import { createPurchaseSchema, CreatePurchaseBody } from './schema';
 import { validateParams } from '../validation-util';
-import { Context } from 'koa';
 
-export async function validateCreatePurchase(ctx: Context, next: Function) {
-  await validateParams(ctx, createPurchaseSchema, next);
+export function validateCreatePurchase(body: Request['body'], ctx: Context): body is CreatePurchaseBody {
+  return validateParams(body, ctx, createPurchaseSchema);
 }

@@ -26,10 +26,6 @@ export const getApp = () => {
       partialRoute = partialRoute.bind(router, route.authorization);
     } 
 
-    if (route.validation) {
-      partialRoute = partialRoute.bind(router, route.validation);
-    } 
-
     partialRoute(route.action);
   });
 

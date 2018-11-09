@@ -1,6 +1,7 @@
-import { loginSchema } from './schema';
+import { loginSchema, LoginBody } from './schema';
 import { validateParams } from '../validation-util';
+import { Request, Context } from 'koa';
 
-export async function validateLogin(ctx: any, next: Function) {
-  await validateParams(ctx, loginSchema, next);
+export function validateLogin(body: Request['body'], ctx: Context): body is LoginBody {
+  return validateParams(body, ctx, loginSchema);
 }

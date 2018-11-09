@@ -1,6 +1,4 @@
 import { getAllUsers, getUserById, createUser, updateUser, getUserAuth } from './user/actions';
-import { validateCreateUser, validateUpdateUser } from './user/validators';
-
 import { getAllTags, createTag } from './tag/actions';
 import { validateCreateTag } from './tag/validators';
 
@@ -8,7 +6,6 @@ import { getAllPurchases, createPurchase } from './purchase/actions';
 import { validateCreatePurchase } from './purchase/validators';
 
 import { login } from './session/actions';
-import { validateLogin } from './session/validators';
 
 import { byUser } from './middleware/authorization';
 
@@ -18,7 +15,6 @@ export interface Route {
     path: string;
     method: Method;
     action: Function;
-    validation?: Function;
     authorization?: Function;
 }
 
@@ -27,7 +23,6 @@ export const routes: Route[] = [
         path: '/login',
         method: 'post',
         action: login,
-        validation: validateLogin,
     },
     {
         path: '/users',
@@ -43,7 +38,6 @@ export const routes: Route[] = [
     {
         path: '/users',
         method: 'post',
-        //validation: validateCreateUser,
         action: createUser 
     },
     {
@@ -56,7 +50,6 @@ export const routes: Route[] = [
         path: '/users/:userId',
         method: 'put',
         authorization: byUser,
-        //validation: validateUpdateUser,
         action: updateUser 
     },
     {
@@ -68,7 +61,6 @@ export const routes: Route[] = [
         path: '/tags',
         method: 'post',
         authorization: byUser,
-        validation: validateCreateTag,
         action: createTag,
     },
     {
@@ -81,7 +73,6 @@ export const routes: Route[] = [
         path: '/users/:userId/purchases',
         method: 'post',
         authorization: byUser,
-        validation: validateCreatePurchase,
         action: createPurchase,
     }
 ];

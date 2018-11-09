@@ -1,6 +1,7 @@
-import { createTagSchema } from './schema';
+import { createTagSchema, CreateTagBody } from './schema';
 import { validateParams } from '../validation-util';
+import { Request, Context } from 'koa';
 
-export async function validateCreateTag(ctx: any, next: Function) {
-  await validateParams(ctx, createTagSchema, next);
+export function validateCreateTag(body: Request['body'], ctx: Context): body is CreateTagBody {
+  return validateParams(body, ctx, createTagSchema);
 }

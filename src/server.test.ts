@@ -17,7 +17,7 @@ describe("routes: index", () => {
     done();
   });
 
-  afterAll(function () {
+  afterAll(() => {
     server.close();
     connection.close();
   });

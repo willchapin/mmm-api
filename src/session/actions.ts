@@ -6,16 +6,23 @@ import { randomBytes, createHash } from 'crypto';
 
 import { User } from '../user/entity';
 import { Session } from './entity';
+import { validateLogin } from "./validators";
+import { Context } from 'koa';
 
-export async function login(ctx: any) {
-  const email = ctx.request.body.email;
+export async function login(ctx: Context) {
+  const body = ctx.request.body;
+  if (!validateLogin(body, ctx)) {
+    return;
+  }
+
+  const email = body.email;
   const user = await getRepository(User).findOne({ where: { email } });
   if (!user) {
     unauthorized(ctx);
     return;
   }
 
-  const match = await compare(ctx.request.body.password, user.password);
+  const match = await compare(body.password, user.password);
   if (!match) {
     unauthorized(ctx);
     return;
@@ -42,7 +49,7 @@ export async function login(ctx: any) {
   };
 }
 
-function unauthorized(ctx: any) {
+function unauthorized(ctx: Context) {
   ctx.status = 401;
   ctx.body = {
     error: {
