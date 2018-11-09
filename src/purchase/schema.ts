@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { tagName,  } from '../tag/schema';
+import { tagName } from '../tag/schema';
 
 const id = Joi.number();
 const description = Joi.string().min(1).max(280);
