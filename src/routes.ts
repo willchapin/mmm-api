@@ -1,10 +1,6 @@
 import { getAllUsers, getUserById, createUser, updateUser, getUserAuth } from './user/actions';
-import { getAllTags, createTag } from './tag/actions';
-import { validateCreateTag } from './tag/validators';
-
 import { getAllPurchases, createPurchase } from './purchase/actions';
-import { validateCreatePurchase } from './purchase/validators';
-
+import { getAllTags, createTag } from './tag/actions';
 import { login } from './session/actions';
 
 import { byUser } from './middleware/authorization';
@@ -24,11 +20,12 @@ export const routes: Route[] = [
         method: 'post',
         action: login,
     },
-    {
-        path: '/users',
-        method: 'get',
-        action: getAllUsers
-    },
+    // don't make all users public
+    //{
+    //    path: '/users',
+    //    method: 'get',
+    //    action: getAllUsers
+    //},
     {
         path: '/users/:userId/auth',
         method: 'get',
